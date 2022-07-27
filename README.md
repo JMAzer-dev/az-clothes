@@ -10,3 +10,4 @@ descriptions
 4. Create Website Layout
 5. List Products
 6. Create Product Details
+7. Handle add to cart
