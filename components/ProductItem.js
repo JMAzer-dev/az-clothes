@@ -27,3 +27,5 @@ export const ProductItem = ({ product }) => {
     </div>
   );
 };
+
+export default ProductItem

@@ -9,3 +9,4 @@ descriptions
 3. Publish on Github
 4. Create Website Layout
 5. List Products
+6. Create Product Details
