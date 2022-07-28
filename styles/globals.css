@@ -17,10 +17,33 @@ a {
 * {
   box-sizing: border-box;
 }
-
-.card{
-  @apply mb-5 block rounded-lg border border-gray-200 shadow-md
+.card {
+  @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
 }
-.primary-button{
-  @apply rounded bg-amber-300 py-2 px-4 shadow outline-none hover:bg-amber-400 active:bg-amber-500
+.primary-button {
+  @apply rounded bg-amber-300 py-2 px-4 shadow outline-none hover:bg-amber-400 active:bg-amber-500 hover:shadow-md duration-200;
+}
+
+.form_div {
+  @apply relative h-12;
+}
+.form_input {
+  @apply absolute top-0 left-0 w-full h-full text-base border border-[#DADCE0] rounded-lg outline-none p-4 z-[1];
+}
+.form_label {
+  @apply absolute left-3 top-3 bg-white text-[#80868b] text-base
+  duration-200 z-[2];
+}
+.form_button {
+  @apply block ml-auto px-5 py-3 outline-none border-none bg-amber-300
+  text-black rounded-lg duration-300 hover:bg-amber-400 hover:shadow-md;
+}
+.form_input:focus + .form_label {
+  @apply top-[-.8rem] left-[.8rem] px-[3px] text-amber-400 font-medium z-10;
+}
+.form_input:focus {
+  @apply border-amber-400 border-2;
+}
+.form_input:not(:placeholder-shown).form_input:not(:focus) + .form_label {
+  @apply top-[-.8rem] left-[.8rem] px-[3px] font-medium z-10;
 }
