@@ -12,3 +12,4 @@ descriptions
 6. Create Product Details
 7. Handle add to cart
 8. Create cart page
+9. Handle changing cart items
