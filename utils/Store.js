@@ -23,8 +23,15 @@ function reducer(state, action) {
             item.name === existItem.name ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
-      //pega o state anterior e apenas atualize o cart com os valores
-      //guardados anteriormente baseado na expressão anterior
+      //pega o state anterior e apenas atualize o cart(mantendo o valor anterior)
+      // com os valores guardados anteriormente baseado na expressão anterior
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case 'CART_REMOVE_ITEM': {
+      //return all cart items except the action payload passed on click function
+      const cartItems = state.cart.cartItems.filter(
+        (item) => item.slug !== action.payload.slug
+      );
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     default:

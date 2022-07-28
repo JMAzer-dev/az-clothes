@@ -11,6 +11,7 @@ import data from '../../utils/data';
 import { Store } from '../../utils/Store';
 
 export const ProductScreen = () => {
+  const router = useRouter();
   const { state, dispatch } = useContext(Store);
   const { query } = useRouter();
   const { slug } = query;
@@ -34,6 +35,7 @@ export const ProductScreen = () => {
       return;
     }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+    router.push('/cart');
   };
   return (
     <Layout title={product.name}>
