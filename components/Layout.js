@@ -2,13 +2,20 @@
 //react
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 //context
 import { Store } from '../utils/Store';
 
+import CookieConsent from 'react-cookie-consent';
+
 export const Layout = ({ children, title }) => {
+  const [cartItemsCount, setCartItemsCount] = useState(0);
   const { state } = useContext(Store);
   const { cart } = state;
+  useEffect(() => {
+    setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
+  }, [cart.cartItems]);
+
   return (
     <>
       <Head>
@@ -25,11 +32,14 @@ export const Layout = ({ children, title }) => {
             </Link>
             <div>
               <Link href="/cart">
-                <a className="p-2">Cart {cart.cartItems.length > 0 && (
-                  <span className='ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white'>
-                    {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                  </span>
-                )}</a>
+                <a className="p-2">
+                  Cart{' '}
+                  {cartItemsCount > 0 && (
+                    <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
+                      {cartItemsCount}
+                    </span>
+                  )}
+                </a>
               </Link>
               <Link href="/login">
                 <a className="p-2">Login</a>
@@ -38,6 +48,22 @@ export const Layout = ({ children, title }) => {
           </nav>
         </header>
         <main className="container m-auto mt-4 px-8">{children}</main>
+        <CookieConsent
+          buttonText="OK"
+          style={{ backgroundColor: 'rgb(0 0 0 / 0.6)' }}
+          debug={false}
+          expires={150}
+        >
+          This website uses cookies to enhance the user experience.{' '}
+          <span
+            onClick={() =>
+              window.open('https://www.cookiesandyou.com/', '_blank')
+            }
+            className="underline"
+          >
+            Learn more
+          </span>
+        </CookieConsent>
         <footer className="flex justify-center h-10 items-center shadow-inner sm:text-lg text-xs">
           Copyright &copy; 2022 Az Clothes - All rights reserved.
         </footer>

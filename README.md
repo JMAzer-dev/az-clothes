@@ -13,3 +13,4 @@ descriptions
 7. Handle add to cart
 8. Create cart page
 9. Handle changing cart items
+10. Saving cart items on cookies

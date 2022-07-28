@@ -1,9 +1,13 @@
 import { createContext, useReducer } from 'react';
 
+import Cookies from 'js-cookie';
+
 export const Store = createContext();
 
 const initialState = {
-  cart: { cartItems: [] },
+  cart: Cookies.get('cart')
+    ? JSON.parse(Cookies.get('cart'))
+    : { cartItems: [] },
 };
 
 function reducer(state, action) {
@@ -25,6 +29,7 @@ function reducer(state, action) {
         : [...state.cart.cartItems, newItem];
       //pega o state anterior e apenas atualize o cart(mantendo o valor anterior)
       // com os valores guardados anteriormente baseado na expressão anterior
+      Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case 'CART_REMOVE_ITEM': {
@@ -32,6 +37,7 @@ function reducer(state, action) {
       const cartItems = state.cart.cartItems.filter(
         (item) => item.slug !== action.payload.slug
       );
+      Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     default:
