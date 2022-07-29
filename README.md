@@ -15,3 +15,4 @@ descriptions
 9. Handle changing cart items
 10. Saving cart items on cookies
 11. Login form
+12. Connect to MongoDB

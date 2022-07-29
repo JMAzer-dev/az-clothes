@@ -1,4 +1,21 @@
+import * as bcrypt from 'bcrypt';
+const saltRounds = 10;
+const password = bcrypt.hashSync('123456', saltRounds);
 const data = {
+  users: [
+    {
+      name: 'John',
+      email: 'admin@admin.com',
+      password: password,
+      isAdmin: true,
+    },
+    {
+      name: 'Jane',
+      email: 'jane@email.com',
+      password: password,
+      isAdmin: false,
+    },
+  ],
   products: [
     {
       name: 'Free Shirt',
