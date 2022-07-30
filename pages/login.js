@@ -1,19 +1,44 @@
 import Link from 'next/link';
-import React from 'react';
-import Layout from '../components/Layout';
+import React, { useEffect } from 'react';
+import { signIn, useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
+import Layout from '../components/Layout';
+import { getError } from '../utils/error';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 const LoginScreen = () => {
+  const { data: session } = useSession();
+
+  const router = useRouter();
+  const { redirect } = router.query;
+
+  useEffect(() => {
+    if (session?.user) {
+      router.push(redirect || '/');
+    }
+  }, [router, session, redirect]);
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
 
-  const submitHandler = ({ email, password }) => {
-    console.log(email, password)
+  const submitHandler = async ({ email, password }) => {
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+      if (result.error) {
+        toast.error(result.error);
+      }
+    } catch (err) {
+      toast.error(getError(err));
+    }
   };
-
   return (
     <Layout title="Login">
       <div className="l-form">
@@ -49,7 +74,10 @@ const LoginScreen = () => {
               placeholder=" "
               {...register('password', {
                 required: 'Please enter the password',
-                minLength: {value: 5, message: 'Password is min 5 characters'}
+                minLength: {
+                  value: 5,
+                  message: 'Password is min 5 characters',
+                },
               })}
             />
             <label htmlFor="" className="form_label">
@@ -61,8 +89,7 @@ const LoginScreen = () => {
           )}
           <div className="flex items-center justify-between mt-8">
             <p className="">
-              Don&apos;t have an account? {" "}
-              <Link href="/register">Register</Link>
+              Don&apos;t have an account? <Link href="/register">Register</Link>
             </p>
             <button type="submit" className="form_button">
               Login
