@@ -9,8 +9,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a{
-  @apply text-blue-600 hover:text-blue-800
+a {
+  @apply text-blue-600 hover:text-blue-800;
 }
 
 * {
@@ -46,6 +46,9 @@ a{
 .form_input:not(:placeholder-shown).form_input:not(:focus) + .form_label {
   @apply top-[-.8rem] left-[.8rem] px-[3px] font-medium z-10;
 }
-.dropdown-link{
-  @apply flex p-2 hover:bg-gray-200
+.dropdown-link {
+  @apply flex p-2 hover:bg-gray-200;
+}
+.default-button {
+  @apply rounded bg-gray-100 py-2 px-4 text-black shadow outline-none hover:bg-gray-200 active:bg-gray-300;
 }

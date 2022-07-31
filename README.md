@@ -19,3 +19,4 @@ descriptions
 13. Create login API
 14. Add user menu
 15. Create shipping screen
+16. Create payment method screen
