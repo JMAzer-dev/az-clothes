@@ -38,10 +38,10 @@ a{
   text-black rounded-lg duration-300 hover:bg-amber-400 hover:shadow-md;
 }
 .form_input:focus + .form_label {
-  @apply top-[-.8rem] left-[.8rem] px-[3px] text-amber-400 font-medium z-10;
+  @apply top-[-.8rem] left-[.8rem] px-[3px] text-indigo-400 font-medium z-10;
 }
 .form_input:focus {
-  @apply border-amber-400 border-2;
+  @apply border-indigo-500 border-2;
 }
 .form_input:not(:placeholder-shown).form_input:not(:focus) + .form_label {
   @apply top-[-.8rem] left-[.8rem] px-[3px] font-medium z-10;
