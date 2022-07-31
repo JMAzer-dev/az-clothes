@@ -20,7 +20,7 @@ export const Layout = ({ children, title }) => {
   const { cart } = state;
   const logoutHandler = () => {
     Cookies.remove('cart');
-    dispatch({type: 'CART_RESET'})
+    dispatch({ type: 'CART_RESET' });
     signOut({ callbackUrl: '/login' });
   };
 
@@ -35,7 +35,7 @@ export const Layout = ({ children, title }) => {
         <meta name="description" content="Ecommerce Website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ToastContainer position="top-right" limit={1} ></ToastContainer>
+      <ToastContainer position="bottom-center" limit={1}></ToastContainer>
 
       <div className="flex min-h-screen flex-col justify-between">
         <header>

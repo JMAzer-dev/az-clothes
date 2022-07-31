@@ -21,3 +21,4 @@ descriptions
 15. Create shipping screen
 16. Create payment method screen
 17. Seed sample products
+18. Load products from mongodb
