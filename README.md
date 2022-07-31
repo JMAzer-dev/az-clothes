@@ -20,3 +20,4 @@ descriptions
 14. Add user menu
 15. Create shipping screen
 16. Create payment method screen
+17. Seed sample products
