@@ -3,18 +3,27 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 //context
 import { Store } from '../utils/Store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CookieConsent from 'react-cookie-consent';
+import { Menu } from '@headlessui/react';
+import DropdownLink from './DropdownLink';
+import Cookies from 'js-cookie';
 
 export const Layout = ({ children, title }) => {
   const { status, data: session } = useSession();
   const [cartItemsCount, setCartItemsCount] = useState(0);
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { cart } = state;
+  const logoutHandler = () => {
+    Cookies.remove('cart');
+    dispatch({type: 'CART_RESET'})
+    signOut({ callbackUrl: '/login' });
+  };
+
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
   }, [cart.cartItems]);
@@ -26,7 +35,7 @@ export const Layout = ({ children, title }) => {
         <meta name="description" content="Ecommerce Website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ToastContainer position="botton-center" limit={1} />
+      <ToastContainer position="top-right" limit={1} ></ToastContainer>
 
       <div className="flex min-h-screen flex-col justify-between">
         <header>
@@ -48,7 +57,35 @@ export const Layout = ({ children, title }) => {
               {status === 'loading' ? (
                 'Loading'
               ) : session?.user ? (
-                session.user.name
+                <Menu as="div" className="relative inline-block">
+                  <Menu.Button className="text-blue-600">
+                    {session.user.name}
+                  </Menu.Button>
+                  <Menu.Items className="absolute right-0 w-56 origin-top-right shadow-lg bg-white">
+                    <Menu.Item>
+                      <DropdownLink className="dropdown-link" href="/profile">
+                        Profile
+                      </DropdownLink>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <DropdownLink
+                        className="dropdown-link"
+                        href="/order-history"
+                      >
+                        Order History
+                      </DropdownLink>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <a
+                        className="dropdown-link"
+                        href="#"
+                        onClick={logoutHandler}
+                      >
+                        Logout
+                      </a>
+                    </Menu.Item>
+                  </Menu.Items>
+                </Menu>
               ) : (
                 <Link href="/login">
                   <a className="p-2">Login</a>

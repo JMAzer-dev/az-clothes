@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 //component
 import { Layout } from '../../components/Layout';
-import Swal from 'sweetalert2';
 //context_utils
 import data from '../../utils/data';
 import { Store } from '../../utils/Store';
@@ -25,13 +24,7 @@ export const ProductScreen = () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     if (quantity > product.countInStock) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Out of stock',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      
       return;
     }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });

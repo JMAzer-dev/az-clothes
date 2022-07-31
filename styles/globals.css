@@ -9,9 +9,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+a{
+  @apply text-blue-600 hover:text-blue-800
 }
 
 * {
@@ -46,4 +45,7 @@ a {
 }
 .form_input:not(:placeholder-shown).form_input:not(:focus) + .form_label {
   @apply top-[-.8rem] left-[.8rem] px-[3px] font-medium z-10;
+}
+.dropdown-link{
+  @apply flex p-2 hover:bg-gray-200
 }

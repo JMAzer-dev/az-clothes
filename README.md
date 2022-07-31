@@ -16,3 +16,5 @@ descriptions
 10. Saving cart items on cookies
 11. Login form
 12. Connect to MongoDB
+13. Create login API
+14. Add user menu
