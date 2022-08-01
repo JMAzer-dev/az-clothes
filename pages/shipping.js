@@ -4,13 +4,13 @@ import { useForm } from 'react-hook-form';
 import CheckoutWizard from '../components/CheckoutWizard';
 import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router';
 
 const ShippingScreen = () => {
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const { shippingAddress } = cart;
-  const router = useRouter()
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -18,6 +18,14 @@ const ShippingScreen = () => {
     formState: { errors },
     setValue,
   } = useForm();
+
+  useEffect(() => {
+    setValue('fullName', shippingAddress.fullName);
+    setValue('address', shippingAddress.address);
+    setValue('city', shippingAddress.city);
+    setValue('postalCode', shippingAddress.postalCode);
+    setValue('country', shippingAddress.country);
+  }, [setValue, shippingAddress]);
 
   const submitHandler = ({ fullName, address, city, postalCode, country }) => {
     dispatch({
@@ -37,16 +45,8 @@ const ShippingScreen = () => {
         },
       })
     );
-    router.push('/payment')
+    router.push('/payment');
   };
-
-  useEffect(() => {
-    setValue('fullName', shippingAddress.fullName);
-    setValue('address', shippingAddress.address);
-    setValue('city', shippingAddress.city);
-    setValue('postalCode', shippingAddress.postalCode);
-    setValue('country', shippingAddress.country);
-  }, [setValue, shippingAddress]);
 
   return (
     <Layout title="Shipping">
@@ -57,7 +57,7 @@ const ShippingScreen = () => {
           onSubmit={handleSubmit(submitHandler)}
         >
           <h1 className="text-lg form-title relative mb-6">Shipping Address</h1>
-          <div className="form_div mb-4">
+          <div className="form_div">
             <input
               id="fullName"
               type="text"
@@ -66,16 +66,18 @@ const ShippingScreen = () => {
               autoFocus
               {...register('fullName', {
                 required: 'Please enter full name',
+                minLength: { value: 3, message: 'Name is min 3 characters' },
               })}
             />
-            {errors.fullName && (
-              <div className="text-red-500">{errors.fullName.message}</div>
-            )}
+
             <label className="form_label cursor-text" htmlFor="fullName">
               Full Name
             </label>
           </div>
-          <div className="form_div mb-4">
+          {errors.fullName && (
+            <div className="text-red-500">{errors.fullName.message}</div>
+          )}
+          <div className="form_div mt-4">
             <input
               id="address"
               type="text"
@@ -86,14 +88,14 @@ const ShippingScreen = () => {
                 minLength: { value: 3, message: 'Enter a valid address' },
               })}
             />
-            {errors.address && (
-              <div className="text-red-500">{errors.address.message}</div>
-            )}
             <label className="form_label cursor-text" htmlFor="address">
-              Address
+              Full Address
             </label>
           </div>
-          <div className="form_div mb-4">
+          {errors.address && (
+            <div className="text-red-500 text-sm">{errors.address.message}</div>
+          )}
+          <div className="form_div mt-4">
             <input
               id="city"
               type="text"
@@ -103,14 +105,14 @@ const ShippingScreen = () => {
                 required: 'Please enter city',
               })}
             />
-            {errors.city && (
-              <div className="text-red-500">{errors.city.message}</div>
-            )}
             <label className="form_label cursor-text" htmlFor="city">
               City
             </label>
           </div>
-          <div className="form_div mb-4">
+          {errors.city && (
+            <div className="text-red-500">{errors.city.message}</div>
+          )}
+          <div className="form_div mt-4">
             <input
               id="postalCode"
               type="text"
@@ -120,14 +122,14 @@ const ShippingScreen = () => {
                 required: 'Please enter postal code',
               })}
             />
-            {errors.postalCode && (
-              <div className="text-red-500">{errors.postalCode.message}</div>
-            )}
             <label className="form_label cursor-text" htmlFor="postalCode">
               Postal Code
             </label>
           </div>
-          <div className="form_div mb-4">
+          {errors.postalCode && (
+            <div className="text-red-500">{errors.postalCode.message}</div>
+          )}
+          <div className="form_div mt-4">
             <input
               id="country"
               type="text"
@@ -137,14 +139,14 @@ const ShippingScreen = () => {
                 required: 'Please enter Country',
               })}
             />
-            {errors.country && (
-              <div className="text-red-500">{errors.country.message}</div>
-            )}
             <label className="form_label cursor-text" htmlFor="country">
               Country
             </label>
           </div>
-          <div className="mb-4 flex justify-between">
+          {errors.country && (
+            <div className="text-red-500">{errors.country.message}</div>
+          )}
+          <div className="mt-4 flex justify-between">
             <button className="form_button">Next</button>
           </div>
         </form>

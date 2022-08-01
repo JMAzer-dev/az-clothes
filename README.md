@@ -22,3 +22,4 @@ descriptions
 16. Create payment method screen
 17. Seed sample products
 18. Load products from mongodb
+19. Create place order screen

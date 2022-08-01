@@ -111,7 +111,7 @@ export const Layout = ({ children, title }) => {
             Learn more
           </span>
         </CookieConsent>
-        <footer className="flex justify-center h-10 items-center shadow-inner sm:text-lg text-xs">
+        <footer className="flex justify-center sm:p-6 p-4 items-center shadow-inner sm:text-lg text-sm">
           Copyright &copy; 2022 Az Clothes - All rights reserved.
         </footer>
       </div>

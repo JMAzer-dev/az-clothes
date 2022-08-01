@@ -1,5 +1,5 @@
 const getError = (err) =>
-  err.responde.data && err.response.data.message
+  err.response.data && err.response.data.message
     ? err.message.data.message
     : err.message;
 

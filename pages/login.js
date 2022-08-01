@@ -49,6 +49,7 @@ const LoginScreen = () => {
           <h1 className="text-lg form-title relative mb-6">Login</h1>
           <div className="form_div">
             <input
+              id="loginEmail"
               type="text"
               className="form_input"
               placeholder=" "
@@ -60,7 +61,7 @@ const LoginScreen = () => {
                 },
               })}
             />
-            <label htmlFor="" className="form_label">
+            <label htmlFor="loginEmail" className="form_label cursor-text">
               Email
             </label>
           </div>
@@ -69,6 +70,7 @@ const LoginScreen = () => {
           )}
           <div className="form_div mt-4">
             <input
+              id="loginPassword"
               type="password"
               className="form_input"
               placeholder=" "
@@ -80,7 +82,7 @@ const LoginScreen = () => {
                 },
               })}
             />
-            <label htmlFor="" className="form_label">
+            <label htmlFor="loginPassword" className="form_label cursor-text">
               Password
             </label>
           </div>
