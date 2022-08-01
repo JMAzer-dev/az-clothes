@@ -97,7 +97,7 @@ export const Layout = ({ children, title }) => {
         <main className="container m-auto mt-4 px-8">{children}</main>
         <CookieConsent
           buttonText="OK"
-          style={{ backgroundColor: 'rgb(0 0 0 / 0.6)' }}
+          style={{ backgroundColor: 'rgb(0 0 0 / 0.8)' }}
           debug={false}
           expires={150}
         >

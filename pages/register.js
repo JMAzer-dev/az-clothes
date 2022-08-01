@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import { getError } from '../utils/error';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const LoginScreen = () => {
   const { data: session } = useSession();
@@ -22,11 +23,17 @@ const LoginScreen = () => {
   const {
     handleSubmit,
     register,
+    getValues,
     formState: { errors },
   } = useForm();
 
-  const submitHandler = async ({ email, password }) => {
+  const submitHandler = async ({ name, email, password }) => {
     try {
+      await axios.post('/api/auth/signup', {
+        name,
+        email,
+        password,
+      });
       const result = await signIn('credentials', {
         redirect: false,
         email,
@@ -40,17 +47,34 @@ const LoginScreen = () => {
     }
   };
   return (
-    <Layout title="Login">
+    <Layout title="Create Account">
       <div className="l-form">
         <form
           onSubmit={handleSubmit(submitHandler)}
           className="card mx-auto mt-[50px] max-w-screen-sm py-16 px-8 md:w-[60%] lg:w-[50%]"
         >
-          <h1 className="text-lg form-title relative mb-6">Login</h1>
+          <h1 className="text-lg form-title relative mb-6">Create Account</h1>
           <div className="form_div">
             <input
-              id="loginEmail"
+              id="name"
               type="text"
+              className="form_input"
+              placeholder=" "
+              {...register('name', {
+                required: 'Please enter name',
+              })}
+            />
+            <label htmlFor="name" className="form_label cursor-text">
+              Name
+            </label>
+          </div>
+          {errors.name && (
+            <div className="text-red-500">{errors.name.message}</div>
+          )}
+          <div className="form_div mt-4">
+            <input
+              id="email"
+              type="email"
               className="form_input"
               placeholder=" "
               {...register('email', {
@@ -61,7 +85,7 @@ const LoginScreen = () => {
                 },
               })}
             />
-            <label htmlFor="loginEmail" className="form_label cursor-text">
+            <label htmlFor="email" className="form_label cursor-text">
               Email
             </label>
           </div>
@@ -70,7 +94,7 @@ const LoginScreen = () => {
           )}
           <div className="form_div mt-4">
             <input
-              id="loginPassword"
+              id="password"
               type="password"
               className="form_input"
               placeholder=" "
@@ -82,19 +106,39 @@ const LoginScreen = () => {
                 },
               })}
             />
-            <label htmlFor="loginPassword" className="form_label cursor-text">
+            <label htmlFor="password" className="form_label cursor-text">
               Password
             </label>
           </div>
           {errors.password && (
             <div className="text-red-500">{errors.password.message}</div>
           )}
+          <div className="form_div mt-4">
+            <input
+              id="confirmPassword"
+              type="password"
+              className="form_input"
+              placeholder=" "
+              {...register('confirmPassword', {
+                required: 'Please enter the confirm password',
+                validate: (value) =>
+                  value === getValues('password') ||
+                  'The passwords do not match',
+              })}
+            />
+            <label htmlFor="confirmPassword" className="form_label cursor-text">
+              Confirm Password
+            </label>
+          </div>
+          {errors.confirmPassword && (
+            <div className="text-red-500">{errors.confirmPassword.message}</div>
+          )}
           <div className="flex items-center justify-between mt-8">
             <p className="">
-              Don&apos;t have an account? <Link href={`/register?redirect=${redirect || '/'}`}>Register</Link>
+              Already have an account? <Link href="/login">Login</Link>
             </p>
             <button type="submit" className="form_button">
-              Login
+              Register
             </button>
           </div>
         </form>

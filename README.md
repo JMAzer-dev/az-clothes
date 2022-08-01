@@ -24,3 +24,4 @@ descriptions
 18. Load products from mongodb
 19. Create place order screen
 20. Create order screen
+21. Create register screen
