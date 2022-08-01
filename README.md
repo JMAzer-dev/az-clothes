@@ -25,3 +25,4 @@ descriptions
 19. Create place order screen
 20. Create order screen
 21. Create register screen
+22. Pay order by Paypal
