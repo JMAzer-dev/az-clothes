@@ -6,7 +6,7 @@ import { getError } from '../../utils/error';
 import * as Fa from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
-import toast from 'react-toastify'
+import toast from 'react-toastify';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 
 function reducer(state, action) {
@@ -38,14 +38,12 @@ function OrderScreen() {
   const { query } = router;
   const orderId = query.id;
 
-  const [
-    { loading, error, order, successPay, loadingPay },
-    dispatch,
-  ] = useReducer(reducer, {
-    loading: true,
-    order: {},
-    error: '',
-  });
+  const [{ loading, error, order, successPay, loadingPay }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      order: {},
+      error: '',
+    });
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -115,14 +113,14 @@ function OrderScreen() {
           details
         );
         dispatch({ type: 'PAY_SUCCESS', payload: data });
-        toast.success('Thank you!! Order is paid successfully!!');
+        toast.success('Order is paid successfully! :)');
       } catch (err) {
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
       }
     });
   }
-
+  
   function onError(err) {
     toast.error(getError(err));
   }
