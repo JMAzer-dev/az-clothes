@@ -1,7 +1,5 @@
 # Nextjs Tailwind ECommerce Website
 
-descriptions
-
 ## Development Steps
 
 1. Install Tools
@@ -27,3 +25,4 @@ descriptions
 21. Create register screen
 22. Pay order by Paypal
 23. Create order history screen
+24. User profile screen
