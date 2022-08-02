@@ -1,7 +1,5 @@
 # Nextjs Tailwind ECommerce Website
 
-descriptions
-
 ## Development Steps
 
 1. Install Tools
