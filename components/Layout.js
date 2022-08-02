@@ -41,9 +41,9 @@ export const Layout = ({ children, title }) => {
         <header>
           <nav className="flex h-12 justify-between items-center px-8 shadow-md">
             <Link href="/">
-              <a className="text-lg font-bold">Az Clothes</a>
+              <a className="text-2xl font-extrabold">Az Clothes</a>
             </Link>
-            <div>
+            <div className="text-lg">
               <Link href="/cart">
                 <a className="p-2">
                   Cart{' '}
@@ -75,6 +75,16 @@ export const Layout = ({ children, title }) => {
                         Order History
                       </DropdownLink>
                     </Menu.Item>
+                    {session.user.isAdmin && (
+                      <Menu.Item>
+                        <DropdownLink
+                          className="dropdown-link"
+                          href="/admin/dashboard"
+                        >
+                          Admin Dashboard
+                        </DropdownLink>
+                      </Menu.Item>
+                    )}
                     <Menu.Item>
                       <a
                         className="dropdown-link"
