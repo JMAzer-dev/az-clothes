@@ -25,7 +25,5 @@
 21. Create register screen
 22. Pay order by Paypal
 23. Create order history screen
-<<<<<<< HEAD
 24. User profile update screen
-=======
->>>>>>> 74013625d65cc984849bfefc79be56b5f9845b00
+
