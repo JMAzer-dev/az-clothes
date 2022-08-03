@@ -12,6 +12,7 @@ import CookieConsent from 'react-cookie-consent';
 import { Menu } from '@headlessui/react';
 import DropdownLink from './DropdownLink';
 import Cookies from 'js-cookie';
+import LoadState from './LoadState';
 
 export const Layout = ({ children, title }) => {
   const { status, data: session } = useSession();
@@ -36,14 +37,13 @@ export const Layout = ({ children, title }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ToastContainer position="bottom-center" limit={1}></ToastContainer>
-
       <div className="flex min-h-screen flex-col justify-between">
         <header>
           <nav className="flex h-12 justify-between items-center px-8 shadow-md">
             <Link href="/">
-              <a className="text-lg font-bold">Az Clothes</a>
+              <a className="text-2xl font-extrabold">Az Clothes</a>
             </Link>
-            <div>
+            <div className="text-lg">
               <Link href="/cart">
                 <a className="p-2">
                   Cart{' '}
@@ -55,7 +55,7 @@ export const Layout = ({ children, title }) => {
                 </a>
               </Link>
               {status === 'loading' ? (
-                'Loading'
+                <LoadState loading={true}/>
               ) : session?.user ? (
                 <Menu as="div" className="relative inline-block">
                   <Menu.Button className="text-blue-600">
@@ -75,6 +75,16 @@ export const Layout = ({ children, title }) => {
                         Order History
                       </DropdownLink>
                     </Menu.Item>
+                    {session.user.isAdmin && (
+                      <Menu.Item>
+                        <DropdownLink
+                          className="dropdown-link"
+                          href="/admin/dashboard"
+                        >
+                          Admin Dashboard
+                        </DropdownLink>
+                      </Menu.Item>
+                    )}
                     <Menu.Item>
                       <a
                         className="dropdown-link"

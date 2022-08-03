@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { getError } from '../utils/error';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import LoadState from '../components/LoadState';
 
 const PlaceOrderScreen = () => {
   const { state, dispatch } = useContext(Store);
@@ -64,6 +65,7 @@ const PlaceOrderScreen = () => {
   };
   return (
     <Layout title="Place Order">
+      <LoadState loading={loading} />
       <CheckoutWizard activeStep={3} />
       <h1>Place Order</h1>
       {cartItems.length === 0 ? (

@@ -3,10 +3,11 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 //component
 import { Layout } from '../../components/Layout';
+import LoadState from '../../components/LoadState';
 import Product from '../../models/Product';
 //context_utils
 import db from '../../utils/db';
@@ -16,12 +17,14 @@ export const ProductScreen = (props) => {
   const { product } = props;
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
+  const [loading, setLoading] = useState(false);
 
   if (!product) {
     return <Layout title="Product Not Found">Product Not Found</Layout>;
   }
 
   const addToCartHandler = async () => {
+    setLoading(true);
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
@@ -30,10 +33,12 @@ export const ProductScreen = (props) => {
       return toast.error('Sorry. Product is out of stock');
     }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+    setLoading(false);
     router.push('/cart');
   };
   return (
     <Layout title={product.name}>
+      <LoadState loading={loading} />
       <div className="py-2">
         <Link href="/">back to products</Link>
       </div>
