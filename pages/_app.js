@@ -3,6 +3,7 @@ import { SessionProvider, useSession } from 'next-auth/react';
 import { StoreProvider } from '../utils/Store';
 import { useRouter } from 'next/router';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import LoadState from '../components/LoadState';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
@@ -30,10 +31,14 @@ function Auth({ children, adminOnly }) {
     },
   });
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LoadState loading={true} />
+      </div>
+    );
   }
-  if(adminOnly && !session.user.isAdmin){
-    return router.push('/unauthorized?message=admin login required')
+  if (adminOnly && !session.user.isAdmin) {
+    return router.push('/unauthorized?message=admin login required');
   }
   return children;
 }

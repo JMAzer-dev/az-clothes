@@ -13,6 +13,7 @@ import {
 import { useEffect, useReducer } from 'react';
 import Layout from '../../components/Layout';
 import { getError } from '../../utils/error';
+import LoadState from '../../components/LoadState';
 
 ChartJS.register(
   CategoryScale,
@@ -79,6 +80,7 @@ const AdminDashboardScreen = () => {
 
   return (
     <Layout title="Admin Dashboard">
+      <LoadState loading={loading}/>
       <div className="grid md:grid-cols-4 md:gap-5">
         <div>
         <ul>

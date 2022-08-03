@@ -3,8 +3,7 @@ import Link from 'next/link';
 import React, { useEffect, useReducer } from 'react';
 import Layout from '../../components/Layout';
 import { getError } from '../../utils/error';
-import loadImg from '../../public/load.svg';
-import Image from 'next/image';
+import LoadState from '../../components/LoadState';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -41,6 +40,7 @@ const AdminOrderScreen = () => {
 
   return (
     <Layout title="Admin Dashboard">
+      <LoadState loading={loading} />
       <div className="md:grid md:grid-cols-4 md:gap-5">
         <div>
           <ul>
@@ -68,11 +68,7 @@ const AdminOrderScreen = () => {
         </div>
         <div className="md:col-span-3">
           <h1 className="my-6 text-2xl font-bold">Admin Orders</h1>
-          {loading ? (
-            <div className="absolute top-0 right-0 flex justify-center items-center bg-cover bg-black/70 w-screen h-screen">
-              <Image src={loadImg} alt="loading" width={200} height={200} />
-            </div>
-          ) : error ? (
+          {error ? (
             <div className="alert-error">{error}</div>
           ) : (
             <div className="overflow-x-auto">
