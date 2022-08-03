@@ -81,25 +81,31 @@ const AdminDashboardScreen = () => {
     <Layout title="Admin Dashboard">
       <div className="grid md:grid-cols-4 md:gap-5">
         <div>
-          <ul>
-            <li>
-              <Link href="/admin/dashboard">
-                <a className="font-bold">Dashboard</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin/orders">Orders</Link>
-            </li>
-            <li>
-              <Link href="/admin/products">Products</Link>
-            </li>
-            <li>
-              <Link href="/admin/users">Users</Link>
-            </li>
-          </ul>
+        <ul>
+          <li>
+            <Link href="/admin/dashboard">
+              <a className="font-bold border-b">Dashboard</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/admin/orders">
+              <a>Orders</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/admin/products">
+              <a>Products</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/admin/users">
+              <a>Users</a>
+            </Link>
+          </li>
+        </ul>
         </div>
         <div className="md:col-span-3">
-          <h1>Admin Dashboard</h1>
+          <h1 className='my-6 text-2xl font-bold'>Admin Dashboard</h1>
           {loading ? (
             <div>Loading...</div>
           ) : error ? (
