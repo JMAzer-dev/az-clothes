@@ -1,20 +1,24 @@
 import { getSession } from 'next-auth/react';
-import Order from '../../../../models/Order';
+import Product from '../../../../models/Product';
 import db from '../../../../utils/db';
 
 const handler = async (req, res) => {
   const session = await getSession({ req });
-  if (!session || (session && !session.user.isAdmin)) {
+  if (!session || !session.user.isAdmin) {
     return res.status(401).send('Admin signin required');
   }
   if (req.method === 'GET') {
-    await db.connect();
-    const orders = await Order.find({}).populate('user', 'name');
-    await db.disconnect();
-    res.send(orders);
+    return getHandler(req, res);
   } else {
     return res.status(400).send({ message: 'Method not allowed' });
   }
+};
+
+const getHandler = async (req, res) => {
+  await db.connect();
+  const products = await Product.find({});
+  await db.disconnect();
+  res.send(products);
 };
 
 export default handler;
