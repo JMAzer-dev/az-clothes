@@ -8,7 +8,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import toast from 'react-toastify';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
-
+import LoadState from '../../components/LoadState';
+import { useSession } from 'next-auth/react';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -26,12 +27,25 @@ function reducer(state, action) {
       return { ...state, loadingPay: false, errorPay: action.payload };
     case 'PAY_RESET':
       return { ...state, loadingPay: false, successPay: false, errorPay: '' };
+    case 'DELIVER_REQUEST':
+      return { ...state, loadingDeliver: true };
+    case 'DELIVER_SUCCESS':
+      return { ...state, loadingDeliver: false, successDeliver: true };
+    case 'DELIVER_FAIL':
+      return { ...state, loadingDeliver: false };
+    case 'DELIVER_RESET':
+      return {
+        ...state,
+        loadingDeliver: false,
+        successDeliver: false,
+      };
     default:
       state;
   }
 }
 
 function OrderScreen() {
+  const { data: session } = useSession();
   // order/:id
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
@@ -39,13 +53,23 @@ function OrderScreen() {
   const { query } = router;
   const orderId = query.id;
 
-  const [{ loading, error, order, successPay, loadingPay }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      order: {},
-      error: '',
-    });
-
+  const [
+    {
+      loading,
+      error,
+      order,
+      successPay,
+      loadingPay,
+      loadingDeliver,
+      successDeliver,
+    },
+    dispatch,
+  ] = useReducer(reducer, {
+    loading: true,
+    order: {},
+    error: '',
+  });
+  //fetch
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -56,10 +80,18 @@ function OrderScreen() {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
     };
-    if (!order._id || successPay || (order._id && order._id !== orderId)) {
+    if (
+      !order._id ||
+      successPay ||
+      successDeliver ||
+      (order._id && order._id !== orderId)
+    ) {
       fetchOrder();
       if (successPay) {
         dispatch({ type: 'PAY_RESET' });
+      }
+      if (successDeliver) {
+        dispatch({ type: 'DELIVER_RESET' });
       }
     } else {
       const loadPaypalScript = async () => {
@@ -75,7 +107,7 @@ function OrderScreen() {
       };
       loadPaypalScript();
     }
-  }, [order, orderId, paypalDispatch, successPay]);
+  }, [order, orderId, paypalDispatch, successPay, successDeliver]);
 
   const {
     shippingAddress,
@@ -90,6 +122,7 @@ function OrderScreen() {
     isDelivered,
     deliveredAt,
   } = order;
+
   // Submit order
   function createOrder(data, actions) {
     return actions.order
@@ -114,27 +147,39 @@ function OrderScreen() {
           details
         );
         dispatch({ type: 'PAY_SUCCESS', payload: data });
-        toast.success('Order is paid successfully! :)');
+        toast.success('Order is paid successfully!! :)');
       } catch (err) {
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
       }
     });
   }
-
   function onError(err) {
     toast.error(getError(err));
+  }
+  async function deliverOrderHandler() {
+    try {
+      dispatch({ type: 'DELIVER_REQUEST' });
+      const { data } = await axios.put(
+        `/api/admin/orders/${order._id}/deliver`,
+        {}
+      );
+      dispatch({ type: 'DELIVER_SUCCESS', payload: data });
+      toast.success('Order is delivered');
+    } catch (err) {
+      dispatch({ type: 'DELIVER_FAIL', payload: getError(err) });
+    }
   }
 
   return (
     <Layout title={`Order ${orderId}`}>
-      <h1 className="mb-4 text-xl mx-auto lg:w-[80%]">{`Order ${orderId}`}</h1>
+      <h1 className="mb-4 text-xl mx-auto xl:w-[90%]">{`Order ${orderId}`}</h1>
       {loading ? (
-        <div>Loading...</div>
+        <LoadState loading={loading} />
       ) : error ? (
         <div className="alert-error">{error}</div>
       ) : (
-        <div className="mx-auto grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 lg:w-[80%]">
+        <div className="mx-auto grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 xl:w-[90%]">
           <div className="overflow-x-auto lg:col-span-3">
             <div className="card p-5">
               <h2 className="mb-2 text-lg">Shipping Address</h2>
@@ -257,6 +302,17 @@ function OrderScreen() {
                       </div>
                     )}
                     {loadingPay && <div>Loading...</div>}
+                  </li>
+                )}
+                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
+                  <li>
+                    {loadingDeliver && <LoadState loading={loadingDeliver} />}
+                    <button
+                      className="form_button w-full"
+                      onClick={deliverOrderHandler}
+                    >
+                      Deliver Order
+                    </button>
                   </li>
                 )}
               </ul>
