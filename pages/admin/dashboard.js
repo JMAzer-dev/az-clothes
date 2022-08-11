@@ -80,34 +80,34 @@ const AdminDashboardScreen = () => {
 
   return (
     <Layout title="Admin Dashboard">
-      <LoadState loading={loading}/>
+      <LoadState loading={loading} />
       <div className="grid md:grid-cols-4 md:gap-5">
         <div>
-        <ul>
-          <li>
-            <Link href="/admin/dashboard">
-              <a className="font-bold border-b">Dashboard</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/admin/orders">
-              <a>Orders</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/admin/products">
-              <a>Products</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/admin/users">
-              <a>Users</a>
-            </Link>
-          </li>
-        </ul>
+          <ul>
+            <li>
+              <Link href="/admin/dashboard">
+                <a className="font-bold border-b">Dashboard</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin/orders">
+                <a>Orders</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin/products">
+                <a>Products</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin/users">
+                <a>Users</a>
+              </Link>
+            </li>
+          </ul>
         </div>
         <div className="md:col-span-3">
-          <h1 className='my-6 text-2xl font-bold'>Admin Dashboard</h1>
+          <h1 className="my-6 text-2xl font-bold">Admin Dashboard</h1>
           {loading ? (
             <div>Loading...</div>
           ) : error ? (
@@ -127,7 +127,7 @@ const AdminDashboardScreen = () => {
               <div className="card m-5 p-5">
                 <p className="text-3xl">{summary.productsCount}</p>
                 <p>Products</p>
-                <Link href="/admin/users">View products</Link>
+                <Link href="/admin/products">View products</Link>
               </div>
               <div className="card m-5 p-5">
                 <p className="text-3xl">{summary.usersCount}</p>

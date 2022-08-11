@@ -2,12 +2,12 @@
 
 ## Development Steps
 
-1. Install Tools
+1. Install tools
 2. Create Next App
 3. Publish on Github
-4. Create Website Layout
-5. List Products
-6. Create Product Details
+4. Create website layout
+5. List products
+6. Create product details
 7. Handle add to cart
 8. Create cart page
 9. Handle changing cart items
@@ -26,6 +26,8 @@
 22. Pay order by Paypal
 23. Create order history screen
 24. User profile update screen
-25. Create Admin Dashboard
-26. List Orders For Admin
-
+25. Create admin dashboard
+26. List orders for admin
+27. Deliver order For admin
+28. List products for admin
+29. Create product edit page

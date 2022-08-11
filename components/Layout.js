@@ -17,6 +17,8 @@ import LoadState from './LoadState';
 export const Layout = ({ children, title }) => {
   const { status, data: session } = useSession();
   const [cartItemsCount, setCartItemsCount] = useState(0);
+  const [shadow, setShadow] = useState(false);
+
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const logoutHandler = () => {
@@ -24,6 +26,17 @@ export const Layout = ({ children, title }) => {
     dispatch({ type: 'CART_RESET' });
     signOut({ callbackUrl: '/login' });
   };
+
+  useEffect(() => {
+    const handleShaddow = () => {
+      if (window.scrollY >= 1) {
+        setShadow(true);
+      } else {
+        setShadow(false);
+      }
+    };
+    window.addEventListener("scroll", handleShaddow);
+  }, []);
 
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
@@ -38,8 +51,8 @@ export const Layout = ({ children, title }) => {
       </Head>
       <ToastContainer position="bottom-center" limit={1}></ToastContainer>
       <div className="flex min-h-screen flex-col justify-between">
-        <header>
-          <nav className="flex h-12 justify-between items-center px-8 shadow-md">
+        <header className='mb-20'>
+          <nav className={shadow? "fixed w-full flex h-16 bg-white/90 justify-between items-center px-8 shadow-md duration-300 transition ease-in z-[100]" : "fixed w-full bg-white flex h-20 justify-between items-center px-8 duration-300 transition ease-in"}>
             <Link href="/">
               <a className="text-2xl font-extrabold">Az Clothes</a>
             </Link>
@@ -114,9 +127,9 @@ export const Layout = ({ children, title }) => {
           This website uses cookies to enhance the user experience.{' '}
           <span
             onClick={() =>
-              window.open('https://www.cookiesandyou.com/', '_blank')
+              window.open('https://www.cookiesandyou.com/', '_blank', 'noreferer')
             }
-            className="underline"
+            className="underline cursor-pointer"
           >
             Learn more
           </span>

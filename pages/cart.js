@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
@@ -8,10 +8,12 @@ import { XCircleIcon } from '@heroicons/react/outline';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import LoadState from '../components/LoadState';
 
 const CartScreen = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
+  const [loading, setLoading] = useState(false)
   const {
     cart: { cartItems },
   } = state;
@@ -21,16 +23,19 @@ const CartScreen = () => {
   };
 
   const updateCartHandler = async (item, qty) => {
+    setLoading(true)
     const quantity = Number(qty);
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
       return toast.error('Sorry. Product is out of stock');
     }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+    setLoading(false)
     return toast.success('Product updated to the cart');
   };
   return (
     <Layout title="Shopping Cart">
+      <LoadState loading={loading}/>
       <h1 className="mb-4 text-xl">Shopping Cart</h1>
       {cartItems.length === 0 ? (
         <div>

@@ -39,7 +39,7 @@ const AdminOrderScreen = () => {
   }, []);
 
   return (
-    <Layout title="Admin Dashboard">
+    <Layout title="Admin Orders">
       <LoadState loading={loading} />
       <div className="md:grid md:grid-cols-4 md:gap-5">
         <div>
@@ -51,7 +51,7 @@ const AdminOrderScreen = () => {
             </li>
             <li>
               <Link href="/admin/orders">
-                <a className="font-bold border-b ">Orders</a>
+                <a className="font-bold border-b">Orders</a>
               </Link>
             </li>
             <li>
@@ -67,7 +67,7 @@ const AdminOrderScreen = () => {
           </ul>
         </div>
         <div className="md:col-span-3">
-          <h1 className="my-6 text-2xl font-bold">Admin Orders</h1>
+          <h1 className="my-6 text-2xl font-bold">Orders</h1>
           {error ? (
             <div className="alert-error">{error}</div>
           ) : (
