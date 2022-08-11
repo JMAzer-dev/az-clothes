@@ -82,7 +82,8 @@ const AdminProductsScreen = () => {
                     <th className="p-5 text-left">CATEGORY</th>
                     <th className="p-5 text-left">COUNT</th>
                     <th className="p-5 text-left">RATING</th>
-                    <th className="p-5 text-left">ACTIONS</th>
+                    <th className="p-5 text-left">EDIT</th>
+                    <th className="p-3 text-left">DELETE</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -95,9 +96,14 @@ const AdminProductsScreen = () => {
                       <td className="p-5">{product.countInStock}</td>
                       <td className="p-5">{product.rating}</td>
                       <td className="p-5">
-                        <Link href={`/admin/product/${product._id}`}>Edit</Link>
-                        <span className="ml-1 text-xl font-thin">|</span>
-                        <button className="ml-1 text-red-600">Delete</button>
+                        <Link href={`/admin/product/${product._id}`}>
+                          <a className="default-button">Edit</a>
+                        </Link>
+                      </td>
+                      <td>
+                        <button className="ml-1 text-red-600 bg-red-100 py-2 px-3 rounded-lg hover:bg-red-200">
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}

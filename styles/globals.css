@@ -24,6 +24,10 @@ a {
   @apply rounded bg-amber-300 py-2 px-4 shadow outline-none hover:bg-amber-400 active:bg-amber-500 hover:shadow-md duration-200;
 }
 
+.form_fileDiv{
+  @apply relative h-16;
+}
+
 .form_div {
   @apply relative h-12;
 }

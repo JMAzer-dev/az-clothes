@@ -91,7 +91,7 @@ export const Layout = ({ children, title }) => {
                     {session.user.isAdmin && (
                       <Menu.Item>
                         <DropdownLink
-                          className="dropdown-link"
+                          className="dropdown-link z-[100]"
                           href="/admin/dashboard"
                         >
                           Admin Dashboard

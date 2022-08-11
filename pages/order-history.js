@@ -60,7 +60,7 @@ const OrderHistoryScreen = () => {
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id} className="border-b">
-                  <td className="p-5">{order._id.substring(20, 24)}</td>
+                  <td className="p-5">{order._id.substring(18, 24)}</td>
                   <td className="p-5">{order.createdAt.substring(0, 10)}</td>
                   <td className="p-5">${order.totalPrice}</td>
                   <td>
@@ -70,7 +70,7 @@ const OrderHistoryScreen = () => {
                   </td>
                   <td>
                     {order.isDelivered
-                      ? `${order.deliveredAt.subtring(0, 10)}`
+                      ? `${order.deliveredAt.substring(0, 10)}`
                       : 'Not delivered'}
                   </td>
                   <td className="p-5">

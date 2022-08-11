@@ -38,13 +38,13 @@ export const ProductScreen = (props) => {
   };
   return (
     <Layout title={product.name}>
-      <LoadState loading={loading} />
+      <LoadState loading={loading}/>
       <div className="py-2">
-        <Link href="/">back to products</Link>
+        <Link href="/">back to store</Link>
       </div>
       <div className="grid md:grid-cols-4 md:gap-3">
         {/* dedicate 2 cols for image */}
-        <div className="md:col-span-2">
+        <div className="md:col-span-2 z-0">
           <Image
             src={product.image}
             alt={product.name}
