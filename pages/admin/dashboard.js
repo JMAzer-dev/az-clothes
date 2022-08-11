@@ -107,7 +107,7 @@ const AdminDashboardScreen = () => {
           </ul>
         </div>
         <div className="md:col-span-3">
-          <h1 className="my-6 text-2xl font-bold">Dashboard</h1>
+          <h1 className="my-6 text-2xl font-bold">Admin Dashboard</h1>
           {loading ? (
             <div>Loading...</div>
           ) : error ? (
@@ -127,7 +127,7 @@ const AdminDashboardScreen = () => {
               <div className="card m-5 p-5">
                 <p className="text-3xl">{summary.productsCount}</p>
                 <p>Products</p>
-                <Link href="/admin/users">View products</Link>
+                <Link href="/admin/products">View products</Link>
               </div>
               <div className="card m-5 p-5">
                 <p className="text-3xl">{summary.usersCount}</p>

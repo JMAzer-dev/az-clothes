@@ -6,7 +6,7 @@ import { getError } from '../../utils/error';
 import * as Fa from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
-import toast from 'react-toastify';
+import { toast } from 'react-toastify';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import LoadState from '../../components/LoadState';
 import { useSession } from 'next-auth/react';

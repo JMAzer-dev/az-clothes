@@ -52,7 +52,7 @@ export const Layout = ({ children, title }) => {
       <ToastContainer position="bottom-center" limit={1}></ToastContainer>
       <div className="flex min-h-screen flex-col justify-between">
         <header className='mb-20'>
-          <nav className={shadow? "fixed w-full flex h-16 bg-white/90 justify-between items-center px-8 shadow-md duration-300 transition ease-in" : "fixed w-full bg-white flex h-20 justify-between items-center px-8 duration-300 transition ease-in"}>
+          <nav className={shadow? "fixed w-full flex h-16 bg-white/90 justify-between items-center px-8 shadow-md duration-300 transition ease-in z-[100]" : "fixed w-full bg-white flex h-20 justify-between items-center px-8 duration-300 transition ease-in"}>
             <Link href="/">
               <a className="text-2xl font-extrabold">Az Clothes</a>
             </Link>

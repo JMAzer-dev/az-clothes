@@ -39,7 +39,7 @@ const AdminOrderScreen = () => {
   }, []);
 
   return (
-    <Layout title="Admin Dashboard">
+    <Layout title="Admin Orders">
       <LoadState loading={loading} />
       <div className="md:grid md:grid-cols-4 md:gap-5">
         <div>
