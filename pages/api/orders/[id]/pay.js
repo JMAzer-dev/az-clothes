@@ -8,7 +8,7 @@ const handler = async (req, res) => {
     return res.status(401).send('Signin Required');
   }
 
-  await db.connect;
+  await db.connect();
   const order = await Order.findById(req.query.id);
   if (order) {
     if (order.isPaid) {
