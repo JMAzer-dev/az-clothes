@@ -38,8 +38,6 @@ const AdminProductEditScreen = () => {
     setValue,
   } = useForm();
 
-  const router = useRouter();
-
   useEffect(() => {
     const fetchData = async () => {
       try {
