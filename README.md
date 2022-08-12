@@ -32,3 +32,4 @@
 28. List products for admin
 29. Create product edit page
 30. Upload Product Image
+31. Create and Delete Products
