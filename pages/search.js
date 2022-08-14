@@ -9,7 +9,7 @@ import { Store } from '../utils/Store';
 import ListComponent from '../components/ListComponent';
 import * as Ri from 'react-icons/ri';
 import ProductItem from '../components/ProductItem';
-import Pagination from '@mui/material/pagination';
+import {Pagination} from '@mui/material';
 
 const PAGE_SIZE = 3;
 
@@ -157,7 +157,7 @@ const Search = (props) => {
           <div className="md:col-span-3 md:ml-20 mb-20">
             <div className=" flex justify-between items-center">
               <div className="flex flex-col items-start flex-wrap text-xl">
-                <div className='underline'>
+                <div className="underline">
                   {products.length === 0 ? 'No' : countProducts} Results for
                   {query !== 'all' && query !== '' && ': ' + query}
                   {category !== 'all' && ' / ' + category}
