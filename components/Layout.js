@@ -162,7 +162,7 @@ export const Layout = ({ children, title }) => {
                   </Menu>
                 ) : (
                   <Link href="/login">
-                    <a className="p-2">Login</a>
+                    <a className="p-2 text-white hover:text-[#dbdbdb]">Login</a>
                   </Link>
                 )}
               </div>
