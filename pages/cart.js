@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
 import Link from 'next/link';
 import Image from 'next/image';
-import { XCircleIcon } from '@heroicons/react/outline';
+import { MdClose } from 'react-icons/md';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -36,7 +36,7 @@ const CartScreen = () => {
   return (
     <Layout title="Shopping Cart">
       <LoadState loading={loading}/>
-      <h1 className="mb-4 text-xl">Shopping Cart</h1>
+      <h1 className="my-4 text-2xl font-bold">Shopping Cart</h1>
       {cartItems.length === 0 ? (
         <div>
           Cart is empty. <Link href="/">Go Shopping</Link>
@@ -86,8 +86,8 @@ const CartScreen = () => {
                     </td>
                     <td className="p-5 text-right">${item.price}</td>
                     <td className="p-5 text-center">
-                      <button onClick={() => removeItemHandler(item)}>
-                        <XCircleIcon className="h-5 w-5"></XCircleIcon>
+                      <button onClick={() => removeItemHandler(item)} className="px-2 py-1  hover:bg-[#131921] text-white border-2 bg-[#232f3e] rounded-md hover:text-white text-md font-bold shadow-md">
+                        <MdClose/>
                       </button>
                     </td>
                   </tr>

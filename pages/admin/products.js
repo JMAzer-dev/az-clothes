@@ -147,10 +147,10 @@ const AdminProductsScreen = () => {
           </ul>
         </div>
         <div className="overflow-x-auto md:col-span-3">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center max-w-3xl">
             <h1 className="my-6 text-2xl font-bold">Products</h1>
             <button
-              className="default-button"
+              className="form_button"
               disabled={loadingCreate}
               onClick={createHandler}
             >
@@ -173,8 +173,7 @@ const AdminProductsScreen = () => {
                     <th className="p-5 text-left">CATEGORY</th>
                     <th className="p-5 text-left">COUNT</th>
                     <th className="p-5 text-left">RATING</th>
-                    <th className="p-5 text-left">EDIT</th>
-                    <th className="p-3 text-left">DELETE</th>
+                    <th className="pl-10 text-left">ACTIONS</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -186,17 +185,18 @@ const AdminProductsScreen = () => {
                       <td className="p-5">{product.category}</td>
                       <td className="p-5">{product.countInStock}</td>
                       <td className="p-5">{product.rating}</td>
-                      <td className="p-5">
+                      <td className="pl-5">
                         <Link href={`/admin/product/${product._id}`}>
                           <a className="default-button hover:text-black">
                             Edit
                           </a>
                         </Link>
+                        <span className='ml-4 text-xl'>|</span>
                       </td>
                       <td>
                         <button
                           onClick={() => deleteHandler(product._id)}
-                          className="ml-1 text-red-600 bg-red-100 py-2 px-3 rounded-lg hover:bg-red-200 shadow-sm"
+                          className="text-red-600 bg-red-100 py-2 px-3 rounded-lg hover:bg-red-200 shadow-sm"
                         >
                           Delete
                         </button>

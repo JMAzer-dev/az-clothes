@@ -52,7 +52,7 @@ a {
   @apply top-[-.8rem] left-[.8rem] px-[3px] font-medium z-10;
 }
 .dropdown-link {
-  @apply flex p-2 hover:bg-gray-200;
+  @apply flex p-2 hover:bg-[#546274];
 }
 .default-button {
   @apply rounded bg-gray-100 py-2 px-4 text-black shadow outline-none hover:bg-gray-200 active:bg-gray-300;
@@ -64,4 +64,16 @@ a {
 
 .alert-success {
   @apply my-3 rounded-lg bg-green-100 p-3 text-green-700;
+}
+
+.search-select{
+  @apply outline-none shadow-lg rounded-sm text-lg py-3 px-4 pr-16 w-[220px] bg-[#232f3e] text-white border-0
+}
+
+.custom-arrow{
+  @apply flex bg-amber-300  h-full w-10 absolute top-0 right-0 pointer-events-none items-center justify-center  text-[#232f3e]
+}
+
+.custom-select{
+  @apply w-[220px] relative
 }
