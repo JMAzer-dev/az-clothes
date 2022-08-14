@@ -51,7 +51,7 @@ const AdminUsersScreen = () => {
     } else {
       fetchData();
     }
-  }, []);
+  }, [successDelete]);
 
   const deleteHandler = (userId) => {
     Swal.fire({
@@ -64,7 +64,7 @@ const AdminUsersScreen = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        async function handlerDelete() {
+        async function handlerDelete() { 
           try {
             dispatch({ type: 'DELETE_REQUEST' });
             await axios.delete(`/api/admin/users/${userId}`);
@@ -127,21 +127,19 @@ const AdminUsersScreen = () => {
                 <tbody>
                   {users.map((user) => (
                     <tr key={user._id} className="border-b">
-
-                      <td className='p-5'>{user._id.substring(20,24)}</td>
-                      <td className='p-5'>{user.name.substring(0,10)}</td>
-                      <td className='p-5'>{user.email}</td>
-                      <td className='p-5'>{user.isAdmin ? 'Yes' : 'No'}</td>
-                      <td className='p-5'>
-                      <button
+                      <td className="p-5">{user._id.substring(20, 24)}</td>
+                      <td className="p-5">{user.name.substring(0, 10)}</td>
+                      <td className="p-5">{user.email}</td>
+                      <td className="p-5">{user.isAdmin ? 'Yes' : 'No'}</td>
+                      <td className="p-5">
+                        <button
+                          disabled={loadingDelete}
                           onClick={() => deleteHandler(user._id)}
                           className="ml-1 text-red-600 bg-red-100 py-2 px-3 rounded-lg hover:bg-red-200 shadow-sm"
                         >
                           Delete
                         </button>
                       </td>
-
-                      
                     </tr>
                   ))}
                 </tbody>
