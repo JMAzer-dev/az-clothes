@@ -39,7 +39,7 @@ export const ProductScreen = (props) => {
   return (
     <Layout title={product.name}>
       <LoadState loading={loading}/>
-      <div className="py-2">
+      <div className="py-2 mt-6">
         <Link href="/">back to store</Link>
       </div>
       <div className="grid md:grid-cols-4 md:gap-3">

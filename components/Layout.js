@@ -74,7 +74,7 @@ export const Layout = ({ children, title }) => {
             <div>
 
             <Link href="/">
-                <a className="text-2xl font-extrabold text-white hover:text-white hidden lg:block">
+                <a className="md:text-2xl text-xl font-extrabold text-white hover:text-white hidden lg:block">
                   Az Clothes
                 </a>
               </Link>
@@ -101,7 +101,7 @@ export const Layout = ({ children, title }) => {
                 </a>
               </Link>
 
-              <div className="text-lg">
+              <div className="text-lg flex flex-col md:block">
                 <Link href="/cart">
                   <a className="p-2 text-white hover:text-[#dbdbdb]">
                     Cart{' '}

@@ -40,7 +40,7 @@ const OrderHistoryScreen = () => {
 
   return (
     <Layout title="Order History">
-      <h1 className='text-2xl font-bold my-4'>Order History</h1>
+      <h1 className='text-2xl font-bold my-4 mt-8'>Order History</h1>
       {loading ? (
         <LoadState loading={loading}/>
       ) : error ? (

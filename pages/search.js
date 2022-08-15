@@ -9,8 +9,9 @@ import { Store } from '../utils/Store';
 import ListComponent from '../components/ListComponent';
 import * as Ri from 'react-icons/ri';
 import ProductItem from '../components/ProductItem';
-import {Pagination} from '@mui/material';
+import { Pagination } from '@mui/material';
 
+//static values
 const PAGE_SIZE = 3;
 
 const prices = [
@@ -32,6 +33,8 @@ const ratings = [1, 2, 3, 4, 5];
 
 const Search = (props) => {
   const router = useRouter();
+
+  // default values and proprieties received from backend
   const {
     query = 'all',
     category = 'all',
@@ -42,6 +45,7 @@ const Search = (props) => {
   } = router.query;
   const { products, countProducts, categories, brands, pages } = props;
 
+  // function that redirect page to each query you select on frontend
   const filterSearch = ({
     page,
     category,
@@ -69,6 +73,8 @@ const Search = (props) => {
       query: query,
     });
   };
+
+  // setting target values to query function
   const categoryHandler = (e) => {
     filterSearch({ category: e.target.value });
   };
@@ -100,10 +106,11 @@ const Search = (props) => {
     }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
   };
+
   return (
     <Layout title="Search">
       <div>
-        <div className="md:grid md:grid-cols-4 md:gap-5">
+        <div className="lg:grid lg:grid-cols-4 md:gap-5 mt-4 md:mt-8">
           <ul className="flex flex-col gap-5">
             <li>
               <span className="text-xl">Category:</span>
@@ -154,11 +161,14 @@ const Search = (props) => {
               />
             </li>
           </ul>
-          <div className="md:col-span-3 md:ml-20 mb-20">
-            <div className=" flex justify-between items-center">
+          <div className="lg:col-span-3 lg:ml-20 mb-20 mt-8 lg:mt-0">
+            <div className="flex flex-col md:flex-row md:justify-between justify-start md:items-center items-start my-8 md:mt-0">
               <div className="flex flex-col items-start flex-wrap text-xl">
                 <div className="underline">
-                  {products.length === 0 ? 'No' : countProducts} Results for
+                  {products.length === 0
+                    ? 'No'
+                    : countProducts +
+                      (countProducts > 1 ? ' Results' : ' Result')}
                   {query !== 'all' && query !== '' && ': ' + query}
                   {category !== 'all' && ' / ' + category}
                   {brand !== 'all' && ' /  ' + brand}
@@ -172,7 +182,7 @@ const Search = (props) => {
                     <div className="">
                       <button
                         onClick={() => router.push('/search')}
-                        className="px-2 py-1 border mt-1 text-[#fff] bg-[#232f3e] hover:bg-[#131921] rounded-md"
+                        className="px-2 py-1 border mt-1 text-[#fff] bg-[#232f3e] hover:bg-[#131921] rounded-md mb-4 sm:mb-0"
                       >
                         Clear
                       </button>
@@ -180,7 +190,7 @@ const Search = (props) => {
                   ) : null}
                 </div>
               </div>
-              <div>
+              <div className="">
                 <span className="text-xl">Sort by: </span>
                 <div className="custom-select">
                   <select
@@ -200,10 +210,10 @@ const Search = (props) => {
                 </div>
               </div>
             </div>
-            <div className="flex mt-6 gap-4">
+            <div className="flex flex-col md:flex-row mt-6 gap-4">
               {products &&
                 products.map((product) => (
-                  <div key={product._id} className=" max-w-[300px]">
+                  <div key={product._id} className="lg:max-w-[400px]">
                     <ProductItem
                       product={product}
                       addToCartHandler={addToCartHandler}
@@ -212,13 +222,13 @@ const Search = (props) => {
                 ))}
             </div>
             <nav className="flex justify-center">
-              {pages > 1 && (
-                <Pagination
-                  defaultPage={parseInt(query.page || '1')}
-                  count={pages}
-                  onChange={pageHandler}
-                ></Pagination>
-              )}
+              <Pagination
+                defaultPage={parseInt(query.page || '1')}
+                count={pages}
+                onChange={pageHandler}
+                siblingCount={0}
+                boundaryCount={3}
+              ></Pagination>
             </nav>
           </div>
         </div>

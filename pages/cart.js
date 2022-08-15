@@ -36,7 +36,7 @@ const CartScreen = () => {
   return (
     <Layout title="Shopping Cart">
       <LoadState loading={loading}/>
-      <h1 className="my-4 text-2xl font-bold">Shopping Cart</h1>
+      <h1 className="my-4 mt-8 text-2xl font-bold">Shopping Cart</h1>
       {cartItems.length === 0 ? (
         <div>
           Cart is empty. <Link href="/">Go Shopping</Link>
